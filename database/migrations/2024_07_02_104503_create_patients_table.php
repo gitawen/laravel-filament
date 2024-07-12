@@ -12,10 +12,10 @@ return new class () extends Migration {
     {
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('type');
             $table->date('date_of_birth');
-            $table->integer('owner_id');
+            $table->string('name');
+            $table->foreignId('owner_id')->constrained('owners')->cascadeOnDelete();
+            $table->string('type');
             $table->timestamps();
         });
     }

@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      */
@@ -14,9 +13,9 @@ return new class extends Migration
         Schema::create('treatments', function (Blueprint $table) {
             $table->id();
             $table->string('description');
-            $table->string('notes');
-            $table->decimal('price');
-            $table->integer('patient_id');
+            $table->text('notes')->nullable();
+            $table->foreignId('patient_id')->constrained('patients')->cascadeOnDelete();
+            $table->unsignedInteger('price')->nullable();
             $table->timestamps();
         });
     }
